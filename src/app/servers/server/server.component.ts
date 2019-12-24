@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, Data } from '@angular/router';
 
 @Component({
   selector: 'app-server',
@@ -15,13 +15,21 @@ serverId:number;
 
   ngOnInit() {
     //this.serverId=1;
-     this.serverId=this.route.snapshot.params['id']?this.route.snapshot.params['id']:1;
-    this.server = this.serversService.getServer(this.serverId);
-    this.route.params.subscribe(
-      (paramsTemp:Params)=>{
-         this.server = this.serversService.getServer(+paramsTemp.id);
+    //..... the below CodeNode, the server is passed through the route params....
+    //  this.serverId=this.route.snapshot.params['id']?this.route.snapshot.params['id']:1;
+    // this.server = this.serversService.getServer(this.serverId);
+    // this.route.params.subscribe(
+    //   (paramsTemp:Params)=>{
+    //      this.server = this.serversService.getServer(+paramsTemp.id);
+    //   }
+    // );
+
+    this.route.data.subscribe(
+      (data:Data)=>{
+        this.server=data.server;
+
       }
-    );
+    )
   }
 
   editServer(){
