@@ -11,11 +11,9 @@ export class authRoutingGuardService implements CanActivate, CanActivateChild{
         .then(
             (authenticated:boolean)=>{
             if(authenticated){
-                alert("its true");
                 return true;
             }
             else{
-                alert("its false");
                 this.router.navigate(['/']);
                 return false;
             }
